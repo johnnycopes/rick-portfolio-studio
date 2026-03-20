@@ -4,21 +4,15 @@
 //
 //   Content
 //   ├── Work Projects
-//   │   ├── Ordered
+//   │   ├── Ordered         (drag-and-drop)
 //   │   ├── ──────────
-//   │   ├── By Title
-//   │   └── By Client
+//   │   ├── By Title        (A→Z)
+//   │   └── By Client       (grouped)
 //   ├── ──────────
 //   └── Misc
-//       ├── Websites
-//       │   ├── Ordered        (drag-and-drop)
-//       │   └── Alphabetical   (A→Z by name)
-//       ├── Songs
-//       │   ├── Ordered        (drag-and-drop)
-//       │   └── Alphabetical   (A→Z by title)
-//       └── Instagrams
-//           ├── Ordered        (drag-and-drop)
-//           └── Alphabetical   (A→Z by handle)
+//       ├── Websites        (A→Z by name)
+//       ├── Songs           (A→Z by title)
+//       └── Instagrams      (A→Z by handle)
 
 import type {StructureResolver} from 'sanity/structure'
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
@@ -90,82 +84,37 @@ export const structure: StructureResolver = (S, context) =>
           S.list()
             .title('Misc')
             .items([
-              // Websites
               S.listItem()
                 .title('Websites')
                 .child(
-                  S.list()
+                  S.documentList()
                     .title('Websites')
-                    .items([
-                      orderableDocumentListDeskItem({
-                        type: 'miscWebsite',
-                        title: 'Ordered',
-                        S,
-                        context,
-                      }),
-                      S.listItem()
-                        .title('Alphabetical')
-                        .child(
-                          S.documentList()
-                            .title('Alphabetical')
-                            .schemaType('miscWebsite')
-                            .apiVersion('2024-01-01')
-                            .filter('_type == "miscWebsite"')
-                            .defaultOrdering([{field: 'name', direction: 'asc'}]),
-                        ),
-                    ]),
+                    .schemaType('miscWebsite')
+                    .apiVersion('2024-01-01')
+                    .filter('_type == "miscWebsite"')
+                    .defaultOrdering([{field: 'name', direction: 'asc'}]),
                 ),
 
-              // Songs
               S.listItem()
                 .title('Songs')
                 .child(
-                  S.list()
+                  S.documentList()
                     .title('Songs')
-                    .items([
-                      orderableDocumentListDeskItem({
-                        type: 'miscSong',
-                        title: 'Ordered',
-                        S,
-                        context,
-                      }),
-                      S.listItem()
-                        .title('Alphabetical')
-                        .child(
-                          S.documentList()
-                            .title('Alphabetical')
-                            .schemaType('miscSong')
-                            .apiVersion('2024-01-01')
-                            .filter('_type == "miscSong"')
-                            .defaultOrdering([{field: 'title', direction: 'asc'}]),
-                        ),
-                    ]),
+                    .schemaType('miscSong')
+                    .apiVersion('2024-01-01')
+                    .filter('_type == "miscSong"')
+                    .defaultOrdering([{field: 'title', direction: 'asc'}]),
                 ),
 
-              // Instagrams
               S.listItem()
                 .title('Instagrams')
                 .child(
-                  S.list()
+                  S.documentList()
                     .title('Instagrams')
-                    .items([
-                      orderableDocumentListDeskItem({
-                        type: 'miscInstagram',
-                        title: 'Ordered',
-                        S,
-                        context,
-                      }),
-                      S.listItem()
-                        .title('Alphabetical')
-                        .child(
-                          S.documentList()
-                            .title('Alphabetical')
-                            .schemaType('miscInstagram')
-                            .apiVersion('2024-01-01')
-                            .filter('_type == "miscInstagram"')
-                            .defaultOrdering([{field: 'handle', direction: 'asc'}]),
-                        ),
-                    ]),
+                    .schemaType('miscInstagram')
+                    .apiVersion('2024-01-01')
+                    .filter('_type == "miscInstagram"')
+                    .defaultOrdering([{field: 'handle', direction: 'asc'}]),
                 ),
             ]),
         ),
