@@ -77,7 +77,6 @@ export const workProject = defineType({
               type: 'string',
               description:
                 'The label shown above the video (e.g., "TV", "Case Study", "Full-Length Song")',
-              validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'url',
