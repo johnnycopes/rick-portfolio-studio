@@ -1,6 +1,6 @@
 import {workProject} from './workProject'
-import {miscWebsites} from './miscWebsites'
-import {miscSongs} from './miscSongs'
-import {miscInstagrams} from './miscInstagrams'
+import {miscWebsite} from './miscWebsite'
+import {miscSong} from './miscSong'
+import {miscInstagram} from './miscInstagram'
 
-export const schemaTypes = [workProject, miscWebsites, miscSongs, miscInstagrams]
+export const schemaTypes = [workProject, miscWebsite, miscSong, miscInstagram]
