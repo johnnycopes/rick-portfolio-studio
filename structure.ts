@@ -1,9 +1,6 @@
 // structure.ts
 //
-// Paste this into your sanity.config.ts structureTool({ structure }) config,
-// or import it from a separate file.
-//
-// This gives you:
+// Sidebar layout:
 //
 //   Content
 //   ├── Work Projects
@@ -12,28 +9,31 @@
 //   │   ├── By Title        (flat A→Z list)
 //   │   └── By Client       (grouped by client name)
 //   ├── ──────────
-//   └── Misc Page           (singleton: websites, songs, instagrams)
+//   └── Misc
+//       ├── Websites        (singleton)
+//       ├── Songs           (singleton)
+//       └── Instagrams      (singleton)
 
 import type {StructureResolver} from 'sanity/structure'
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
-// The fixed document ID for the Misc singleton.
-// When creating it for the first time in the Studio, this ID is used
-// so there's always exactly one Misc Page document.
-export const MISC_PAGE_ID = 'miscPage'
+// Fixed document IDs for singletons.
+// Used here in the structure and in the migration script.
+export const MISC_WEBSITES_ID = 'miscWebsites'
+export const MISC_SONGS_ID = 'miscSongs'
+export const MISC_INSTAGRAMS_ID = 'miscInstagrams'
 
 export const structure: StructureResolver = (S, context) =>
   S.list()
     .title('Content')
     .items([
-      // ── Work Projects (nested) ──────────────────────────────
+      // ── Work Projects ───────────────────────────────────────
       S.listItem()
         .title('Work Projects')
         .child(
           S.list()
             .title('Work Projects')
             .items([
-              // Drag-and-drop ordering
               orderableDocumentListDeskItem({
                 type: 'workProject',
                 title: 'Ordered',
@@ -43,7 +43,6 @@ export const structure: StructureResolver = (S, context) =>
 
               S.divider(),
 
-              // Alphabetical by Title
               S.listItem()
                 .title('By Title')
                 .child(
@@ -55,7 +54,6 @@ export const structure: StructureResolver = (S, context) =>
                     .defaultOrdering([{field: 'title', direction: 'asc'}]),
                 ),
 
-              // Grouped by Client
               S.listItem()
                 .title('By Client')
                 .child(async () => {
@@ -85,8 +83,22 @@ export const structure: StructureResolver = (S, context) =>
 
       S.divider(),
 
-      // ── Misc Page (singleton) ───────────────────────────────
+      // ── Misc ────────────────────────────────────────────────
       S.listItem()
-        .title('Misc Page')
-        .child(S.document().schemaType('miscPage').documentId(MISC_PAGE_ID)),
+        .title('Misc')
+        .child(
+          S.list()
+            .title('Misc')
+            .items([
+              S.listItem()
+                .title('Websites')
+                .child(S.document().schemaType('miscWebsites').documentId(MISC_WEBSITES_ID)),
+              S.listItem()
+                .title('Songs')
+                .child(S.document().schemaType('miscSongs').documentId(MISC_SONGS_ID)),
+              S.listItem()
+                .title('Instagrams')
+                .child(S.document().schemaType('miscInstagrams').documentId(MISC_INSTAGRAMS_ID)),
+            ]),
+        ),
     ])
