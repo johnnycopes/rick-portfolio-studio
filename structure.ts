@@ -8,6 +8,7 @@
 //   │   ├── ──────────
 //   │   ├── By Title        (A→Z)
 //   │   └── By Client       (grouped)
+//   ├── About               (singleton)
 //   ├── ──────────
 //   └── Misc
 //       ├── Websites        (A→Z by name)
@@ -16,6 +17,8 @@
 
 import type {StructureResolver} from 'sanity/structure'
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
+
+export const ABOUT_ID = 'about'
 
 export const structure: StructureResolver = (S, context) =>
   S.list()
@@ -74,6 +77,9 @@ export const structure: StructureResolver = (S, context) =>
                 }),
             ]),
         ),
+
+      // ── About ───────────────────────────────────────────────
+      S.listItem().title('About').child(S.document().schemaType('about').documentId(ABOUT_ID)),
 
       S.divider(),
 
