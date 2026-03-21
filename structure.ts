@@ -26,7 +26,7 @@ export const structure: StructureResolver = (S, context) =>
     .items([
       // ── Work Projects ───────────────────────────────────────
       S.listItem()
-        .title('Work Projects')
+        .title('Work')
         .child(
           S.list()
             .title('Work Projects')
