@@ -9,7 +9,6 @@
 //   │   ├── By Title        (A→Z)
 //   │   └── By Client       (grouped)
 //   ├── About               (singleton)
-//   ├── ──────────
 //   └── Misc
 //       ├── Websites        (A→Z by name)
 //       ├── Songs           (A→Z by title)
@@ -80,8 +79,6 @@ export const structure: StructureResolver = (S, context) =>
 
       // ── About ───────────────────────────────────────────────
       S.listItem().title('About').child(S.document().schemaType('about').documentId(ABOUT_ID)),
-
-      S.divider(),
 
       // ── Misc ────────────────────────────────────────────────
       S.listItem()
