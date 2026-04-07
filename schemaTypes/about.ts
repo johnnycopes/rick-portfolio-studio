@@ -41,6 +41,13 @@ export const about = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'resumePassword',
+      title: 'Resume Password',
+      type: 'string',
+      description: 'Visitors must enter this password to view the resume.',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'socialLinks',
       title: 'Social Links',
       type: 'object',
