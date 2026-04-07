@@ -32,66 +32,25 @@ export const about = defineType({
     }),
     defineField({
       name: 'resume',
-      title: 'Résumé (PDF)',
+      title: 'Resume (PDF)',
       type: 'file',
-      description: 'Upload your résumé as a PDF. This will be linked from the About page.',
+      description: 'Upload your resume as a PDF. This will be linked from the About page.',
       options: {
         accept: '.pdf',
       },
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'email',
-      title: 'Email',
-      type: 'string',
-      description: 'Your contact email address.',
-      validation: (rule) => rule.required().email(),
-    }),
-    defineField({
       name: 'socialLinks',
       title: 'Social Links',
       type: 'object',
-      description:
-        "These are used on both the About page and the site header. Update them here and they'll change everywhere.",
+      description: "Update here and it'll change everywhere on the site.",
       fields: [
         defineField({
           name: 'linkedin',
           title: 'LinkedIn',
           type: 'url',
           validation: (rule) => rule.uri({scheme: ['https']}),
-        }),
-        defineField({
-          name: 'instagram',
-          title: 'Instagram',
-          type: 'url',
-          validation: (rule) => rule.uri({scheme: ['https']}),
-        }),
-        defineField({
-          name: 'twitter',
-          title: 'Twitter / X',
-          type: 'url',
-          validation: (rule) => rule.uri({scheme: ['https']}),
-        }),
-      ],
-    }),
-    defineField({
-      name: 'funButton',
-      title: 'Fun Button',
-      type: 'object',
-      description: 'The surprise link at the bottom of the About page.',
-      fields: [
-        defineField({
-          name: 'text',
-          title: 'Label',
-          type: 'string',
-          description: 'The button text (e.g., "Random Wiki")',
-          validation: (rule) => rule.required(),
-        }),
-        defineField({
-          name: 'url',
-          title: 'URL',
-          type: 'url',
-          validation: (rule) => rule.required().uri({scheme: ['http', 'https']}),
         }),
       ],
     }),

@@ -8,11 +8,7 @@
 //   │   ├── ──────────
 //   │   ├── By Title        (A→Z)
 //   │   └── By Client       (grouped)
-//   ├── About               (singleton)
-//   └── Misc
-//       ├── Websites        (A→Z by name)
-//       ├── Songs           (A→Z by title)
-//       └── Instagrams      (A→Z by handle)
+//   └── About               (singleton)
 
 import type {StructureResolver} from 'sanity/structure'
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
@@ -80,45 +76,4 @@ export const structure: StructureResolver = (S, context) =>
       // ── About ───────────────────────────────────────────────
       S.listItem().title('About').child(S.document().schemaType('about').documentId(ABOUT_ID)),
 
-      // ── Misc ────────────────────────────────────────────────
-      S.listItem()
-        .title('Misc')
-        .child(
-          S.list()
-            .title('Misc')
-            .items([
-              S.listItem()
-                .title('Websites')
-                .child(
-                  S.documentList()
-                    .title('Websites')
-                    .schemaType('miscWebsite')
-                    .apiVersion('2024-01-01')
-                    .filter('_type == "miscWebsite"')
-                    .defaultOrdering([{field: 'name', direction: 'asc'}]),
-                ),
-
-              S.listItem()
-                .title('Songs')
-                .child(
-                  S.documentList()
-                    .title('Songs')
-                    .schemaType('miscSong')
-                    .apiVersion('2024-01-01')
-                    .filter('_type == "miscSong"')
-                    .defaultOrdering([{field: 'title', direction: 'asc'}]),
-                ),
-
-              S.listItem()
-                .title('Instagrams')
-                .child(
-                  S.documentList()
-                    .title('Instagrams')
-                    .schemaType('miscInstagram')
-                    .apiVersion('2024-01-01')
-                    .filter('_type == "miscInstagram"')
-                    .defaultOrdering([{field: 'handle', direction: 'asc'}]),
-                ),
-            ]),
-        ),
     ])
