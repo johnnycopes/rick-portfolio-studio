@@ -100,7 +100,7 @@ export const workProject = defineType({
       ],
       validation: (rule) => rule.required().min(1),
     }),
-    orderRankField({type: 'workProject'}),
+    orderRankField({type: 'workProject', newItemPosition: 'before'}),
   ],
   orderings: [orderRankOrdering],
   preview: {
